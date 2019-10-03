@@ -8,7 +8,7 @@ namespace financial_scraper
         {
             Console.WriteLine("Hello World!");
             WebScraper scraper = new WebScraper();
-            scraper.ScrapeData();
+            scraper.ScrapePortfolio();
         }
     }
 }
