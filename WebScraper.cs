@@ -77,37 +77,5 @@ namespace financial_scraper
                 Console.WriteLine("ONE OR LESS HANDLES EXIST");
             }
         }
- 
-
-        private void HandlePopup()
-        {
-            // TODO: Popup logic
-        }
-
-        public void ScrapePortfolio2()
-        {
-            using (IWebDriver driver = new ChromeDriver())
-            {
-                WebDriverWait defaultWait = new WebDriverWait(driver, TimeSpan.FromSeconds(120));
-                driver.Navigate().GoToUrl("https://finance.yahoo.com");
-
-                // Sign in
-                defaultWait.Until<IWebElement>(d => d.FindElement(By.Id("uh-signedin")));
-                driver.FindElement(By.Id("uh-signedin")).Click();
-
-                // TODO: Use environment variables for login
-                defaultWait.Until<IWebElement>(d => d.FindElement(By.XPath("//*[@id=\"login-username\"]")));
-                IWebElement emailLogin = driver.FindElement(By.XPath("//*[@id=\"login-username\"]"));
-                emailLogin.SendKeys("financetester321@gmail.com");
-                driver.FindElement(By.Id("login-signin")).Click();
-
-                //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
-                defaultWait.Until<IWebElement>(d => d.FindElement(By.XPath("/html/body/div[2]/div[2]/div[1]/div[2]/div/form/input[7]")));
-                IWebElement passwordLogin = driver.FindElement(By.XPath("//*[@id=\"login-passwd\"]"));
-                passwordLogin.SendKeys("thisisnew1234");
-                driver.FindElement(By.Id("login-signin")).Click();
-
-            }
-        }
     }
 }
