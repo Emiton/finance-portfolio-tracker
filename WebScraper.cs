@@ -37,12 +37,17 @@ namespace financial_scraper
             passwordLogin.SendKeys("thisisnew1234");
             driver.FindElement(By.Id("login-signin")).Submit();
 
-            HandleNewTab();
-
             driver.FindElement(By.XPath("/html/body/div[1]/div/div/div[1]/div/div[1]/div[2]/div[1]/div/div/div/div/div/div/div/nav/div/div/div/div[3]/div/nav/ul/li[2]/a")).Click();
             defaultWait.Until<IWebElement>(d => d.FindElement(By.XPath("/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[1]/main/table/tbody/tr[1]/td[1]/div[2]/a")));
             driver.FindElement(By.XPath("/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[1]/main/table/tbody/tr[1]/td[1]/div[2]/a")).Click();
 
+
+            driver.Manage().Window.Maximize();
+
+            IWebElement stockTable = driver.FindElement(By.XPath("/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[4]/main/div/div/div[2]/div/div[1]/table/tbody"));
+            IList<IWebElement> stockList = stockTable.FindElements(By.TagName("tr"));
+            int stockCount = stockList.Count;
+            Console.WriteLine($"NUMBER OF STOCKS = {stockCount}");
 
 
 
