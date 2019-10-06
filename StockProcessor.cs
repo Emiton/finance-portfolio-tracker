@@ -5,7 +5,6 @@ using System.Text;
 
 namespace financial_scraper
 {
-    // TODO: Make this class static
     static class StockProcessor
     {
         public static List<StockObject> CreateStockObjectList(IList<IWebElement> StockList)
@@ -13,6 +12,7 @@ namespace financial_scraper
             var StockObjectList = new List<StockObject>();
             int rows = StockList.Count;
             int columns = StockList[0].FindElements(By.TagName("td")).Count;
+            // TODO: DateTime and Database? Switch this to DateTime instead of a string
             var scrapeTime = DateTime.Now.ToString("G");
             
             // XPath elements start at 1 index
@@ -24,8 +24,8 @@ namespace financial_scraper
                 // Last 2 columns are not needed, subtract by 1
                 for (int j = 1; j < columns - 1; j++)
                 {
-                    string currentText = StockList[i].FindElement(By.XPath("/td[{j}]")).Text;
-                    AddEntry(ref tempStock, currentText, j);
+                    string currentText = StockList[i].FindElement(By.XPath($"td[{j}]")).Text;
+                    AddColumnInfo(ref tempStock, currentText, j);
                 }
 
                 StockObjectList.Add(tempStock);
@@ -34,7 +34,7 @@ namespace financial_scraper
             return StockObjectList;
         }
 
-        private static void AddEntry(ref StockObject currentStock, string information, int columnId)
+        private static void AddColumnInfo(ref StockObject currentStock, string information, int columnId)
         {
             switch (columnId)
             {
