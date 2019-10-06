@@ -12,7 +12,7 @@ namespace financial_scraper
     {
         private IWebDriver driver = new FirefoxDriver();
 
-        public void ScrapePortfolio()
+        public IList<IWebElement> ScrapePortfolio()
         {
             WebDriverWait defaultWait = new WebDriverWait(driver, TimeSpan.FromSeconds(120));
             driver.Navigate().GoToUrl("https://finance.yahoo.com");
@@ -48,14 +48,7 @@ namespace financial_scraper
             IList<IWebElement> stockList = stockTable.FindElements(By.TagName("tr"));
             int stockCount = stockList.Count;
             Console.WriteLine($"NUMBER OF STOCKS = {stockCount}");
-
-
-
-
-
-            Console.WriteLine("About to wait...");
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            Console.WriteLine("Finished waiting.");
+            return stockList;
         }
 
         private void HandleNewTab()
