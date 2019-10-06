@@ -12,7 +12,7 @@ namespace financial_scraper
     {
         private IWebDriver driver = new FirefoxDriver();
 
-        public IList<IWebElement> ScrapePortfolio()
+        public IList<IWebElement> ScrapeStockPortfolio()
         {
             WebDriverWait defaultWait = new WebDriverWait(driver, TimeSpan.FromSeconds(120));
             driver.Navigate().GoToUrl("https://finance.yahoo.com");

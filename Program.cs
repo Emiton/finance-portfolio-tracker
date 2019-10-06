@@ -6,11 +6,20 @@ namespace financial_scraper
     {
         static void Main(string[] args)
         {
+            using var db = new StockContext();
             Console.WriteLine("Hello World!");
             WebScraper scraper = new WebScraper();
-            // TODO: Scraper should return table of stocks, change method name?
-            var stockList = scraper.ScrapePortfolio();
+            var stockList = scraper.ScrapeStockPortfolio();
             var stockObjectList = StockProcessor.CreateStockObjectList(stockList);
+
+            foreach (var stock in stockObjectList)
+            {
+                db.StockObjects.Add(stock);
+                db.SaveChanges();
+            }
+
+            // Add Query to check DB
+
             // TODOs
                 // Create list of stocks
                 // Add to DB
