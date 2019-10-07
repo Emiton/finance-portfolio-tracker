@@ -17,16 +17,13 @@ namespace financial_scraper
             WebDriverWait defaultWait = new WebDriverWait(driver, TimeSpan.FromSeconds(120));
             driver.Navigate().GoToUrl("https://finance.yahoo.com");
 
-            // Sign in
             defaultWait.Until<IWebElement>(d => d.FindElement(By.Id("uh-signedin")));
             driver.FindElement(By.Id("uh-signedin")).Click();
 
 
-            // TODO: Use environment variables for login
             defaultWait.Until<IWebElement>(d => d.FindElement(By.XPath("//*[@id=\"login-username\"]")));
             IWebElement emailLogin = driver.FindElement(By.XPath("//*[@id=\"login-username\"]"));
             emailLogin.SendKeys("financetester321@gmail.com");
-            //driver.FindElement(By.Id("login-signin")).Click();
             driver.FindElement(By.XPath("//*[@id=\"login-signin\"]")).Submit();
             HandleNewTab();
 
@@ -64,10 +61,6 @@ namespace financial_scraper
                     driver.Close();
                 }
                 driver.SwitchTo().Window(driver.WindowHandles[0]);
-            }
-            else
-            {
-                Console.WriteLine("ONE OR LESS HANDLES EXIST");
             }
         }
     }
