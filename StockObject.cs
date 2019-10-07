@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace financial_scraper
 {
     class StockObject
     {
+        [Key]
+        [Column(Order=1)]
         public String Symbol { get; set; }
         public String LastPrice { get; set; }
         public String ValueChange { get; set; }
@@ -15,6 +19,8 @@ namespace financial_scraper
         public String Volume { get; set; }
         public String AverageVolume3M { get; set; }
         public String MarketCap { get; set; }
-        public String ScrapeTime { get; set; }
+        [Key]
+        [Column(Order = 2, TypeName = "datetime2")]
+        public DateTime ScrapeTime { get; set; }
     }
 }

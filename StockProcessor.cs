@@ -12,8 +12,7 @@ namespace financial_scraper
             var StockObjectList = new List<StockObject>();
             int rows = StockList.Count;
             int columns = StockList[0].FindElements(By.TagName("td")).Count;
-            // TODO: DateTime and Database? Switch this to DateTime instead of a string
-            var scrapeTime = DateTime.Now.ToString("G");
+            var scrapeTime = DateTime.Now;
             
             // XPath elements start at 1 index
             for (int i = 1; i < rows; i++)
