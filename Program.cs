@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace financial_scraper
 {
@@ -7,7 +8,6 @@ namespace financial_scraper
         static void Main(string[] args)
         {
             using var db = new StockContext();
-            Console.WriteLine("Hello World!");
             WebScraper scraper = new WebScraper();
             var stockList = scraper.ScrapeStockPortfolio();
             var stockObjectList = StockProcessor.CreateStockObjectList(stockList);
@@ -16,16 +16,8 @@ namespace financial_scraper
             {
                 db.StockObjects.Add(stock);
                 db.SaveChanges();
+                Console.WriteLine($"Added {stock.Symbol}");
             }
-
-            // Add Query to check DB
-
-            // TODOs
-                // Create list of stocks
-                // Add to DB
-                // Query DB
-                // Print all stocks out
-                // Think about DateTime for DB, what about making certain queries to DB?
         }
     }
 }
